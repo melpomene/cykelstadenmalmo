@@ -8,7 +8,7 @@ Den är live här [cykelstaden.kejsarmakten.se](http://cykelstaden.kejsarmakten.
 
 Består av två bitar, en webbapp som är skriven med Flask, samt en crawler som hämtar ner infromation från Malmö polisens Twitter.
 
-Om någon orkar lägga på lite CSS hade det varit trevlig, forka på!
+Om någon orkar lägga på lite CSS hade det varit trevlig, forka på! (Fixat av [@ehsanpo](https://twitter.com/ehsanpo))
 
 Installation
 ------------
