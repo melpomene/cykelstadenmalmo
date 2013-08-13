@@ -175,7 +175,8 @@ function initialize(){
     </ul>
 
     <p>
-        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.
+        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.<br />
+        Design och karta är fixat av <a href="https://twitter.com/ehsanpo">@ehsanpo</a>, tackar!
     </p>
 
 <div id="map-canvas"/>
