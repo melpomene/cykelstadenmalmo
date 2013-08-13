@@ -33,8 +33,10 @@ if __name__ == '__main__':
         tweet_id = tweet.id
         tweet_text = tweet.text
         url = tweet.urls[0].url
+        lista = tweet.text.split(',')
+        adress = lista[2].split('http',1)[0]
         if "cykel" in tweet_text or "cyklist" in tweet_text:
-            c.execute('INSERT INTO tweets (tweet, tweet_id, url) VALUES (?, ?, ?)', (tweet_text, tweet_id, url))
+            c.execute('INSERT INTO tweets (tweet, tweet_id, url,adress) VALUES (?, ?, ?, ?)', (tweet_text, tweet_id, url, adress))
             print "JA\t" + tweet_text
         else:
             print "NEJ\t"+tweet_text
