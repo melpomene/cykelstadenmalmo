@@ -24,7 +24,7 @@ if __name__ == '__main__':
         latest_id = [1]
     latest_id = latest_id[0]
 
-    statuses = api.GetUserTimeline(screen_name="polisen_malmo", since_id=int(latest_id))
+    statuses = api.GetUserTimeline(screen_name="polisen_malmo",count=50,since_id=int(latest_id))
     if statuses is None:
         print "Nothing new"
         exit()
@@ -33,9 +33,10 @@ if __name__ == '__main__':
         tweet_id = tweet.id
         tweet_text = tweet.text
         url = tweet.urls[0].url
-        lista = tweet.text.split(',')
-        adress = lista[2].split('http',1)[0]
-        if "cykel" in tweet_text or "cyklist" in tweet_text:
+        adress = tweet.text.rsplit(',',1)[1].split('http',1)[0].replace(".","")
+        #b = a.split('http',1)[0]
+        #adress = a.replace(".","")
+        if "cykel" in tweet_text or "Misshandel" in tweet_text:
             c.execute('INSERT INTO tweets (tweet, tweet_id, url,adress) VALUES (?, ?, ?, ?)', (tweet_text, tweet_id, url, adress))
             print "JA\t" + tweet_text
         else:
