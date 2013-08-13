@@ -5,7 +5,8 @@ import sqlite3
 from datetime import datetime, timedelta
 from flask import Flask
 app = Flask(__name__)
-DB_PATH = '/srv/www/cykelstaden/db.sql'
+
+DB_PATH = 'db.sql'
 
 @app.route("/")
 def main():
@@ -22,41 +23,36 @@ def main():
     html =  """
 <html>
     <head>
-    <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
-    <style>
-        #red {
-            color: red;
-        }
-    </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="static/style.css">
     </head>
-
     <body style="text-align:center">
-
         <h1>Cykelstaden Malmö</h1>
-        <h3>Antal olyckor den här månaden: <font id="red">%d</font></h3>
-        <p><a href="/list/">?</a></p>
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-      _paq.push(["trackPageView"]);
-      _paq.push(["enableLinkTracking"]);
 
-      (function() {
-        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://links.kejsarmakten.se/piwik/";
-        _paq.push(["setTrackerUrl", u+"piwik.php"]);
-        _paq.push(["setSiteId", "1"]);
-        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <!-- Piwik Image Tracker -->
-    <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
-    <!-- End Piwik -->
-    <!-- End Piwik Code --> 
+        <h3>Antal olyckor den här månaden:</h3>
+        <div class="antal">%d</div>
+        <a class="btn"  href="/list/">?</a>
+          
+        <!-- Piwik -->
+            <script type="text/javascript">
+              var _paq = _paq || [];
+              _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+              _paq.push(["trackPageView"]);
+              _paq.push(["enableLinkTracking"]);
 
-
-
+              (function() {
+                var u=(("https:" == document.location.protocol) ? "https" : "http") + "://links.kejsarmakten.se/piwik/";
+                _paq.push(["setTrackerUrl", u+"piwik.php"]);
+                _paq.push(["setSiteId", "1"]);
+                var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+                g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+              })();
+            </script>
+            <!-- Piwik Image Tracker -->
+            <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+        <!-- End Piwik -->
     </body>
 </html>
 """ % (amount)
@@ -75,8 +71,11 @@ def list():
 
 <html>
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/style.css">
     <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script> 
-    <title>Cykelstaden malmÃ¶ - Ã–vervakar cykelolyckor i MalmÃ¶</title>
+    <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
     <style>
     html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
@@ -87,7 +86,7 @@ def list():
             color: red;
         }
         #center {
-            text-align:center;
+            text-align:center;  
         }
     </style>
     <script type="text/javascript"
@@ -106,7 +105,7 @@ function initialize(){
     """
     k = ""
     for row in res:
-       k += u"address.push('%s + MalmÃ¶,Sweden');" % (row[4])
+       k += u"address.push('%s + Malmö,Sweden');" % (row[4])
 
 
 
@@ -164,8 +163,9 @@ function initialize(){
 
     <body >
 
-        <a href="/"><h1 style="text-align:center">Cykelstaden MalmÃ¶</h1></a>
-        <p>Cykelolyckor i MalmÃ¶ raporterade av polisen de senaste 31 dagarna:</p>
+        <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
+        <div class="warp" >
+        <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
         <ul>
 """
     l = ""
@@ -175,9 +175,10 @@ function initialize(){
     </ul>
 
     <p>
-        Jag är en cyklist i MalmÃ¶. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.
+        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.
     </p>
-    
+
+<div id="map-canvas"/>
     <div id="map-canvas"/>
     <!-- Piwik -->
     <script type="text/javascript">
@@ -199,7 +200,7 @@ function initialize(){
     <!-- End Piwik -->
     <!-- End Piwik Code --> 
 
-
+    </div>
     </body>
 </html>
 """
@@ -207,5 +208,6 @@ function initialize(){
 
 
 if __name__ == "__main__":
-    app.debug = False 
+    app.debug = True 
     app.run(host="0.0.0.0")
+
