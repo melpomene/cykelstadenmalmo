@@ -153,7 +153,7 @@ function initialize(){
     <p>
         Jag är en cyklist i Malmö, vill ni kontakta mig når ni mig lättast på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller <a href="http://blog.kejsarmakten.se/">här</a>
     </p>
-    <center><img width="150px" class="center" src="http://i.imgur.com/kTRS6py.png" /></center>
+    
 <div id="map-canvas"/>
 
     </body>
