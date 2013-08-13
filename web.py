@@ -154,7 +154,8 @@ function initialize(){
         }
         //set the center to the bound area and fit the map accordingly
         map.setCenter(latlngbounds.getCenter());
-        //map.fitBounds(latlngbounds);
+        map.fitBounds(latlngbounds);
+        map.setZoom(13);
     },500);
 };
     
