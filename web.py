@@ -5,10 +5,11 @@ import sqlite3
 from datetime import datetime, timedelta
 from flask import Flask
 app = Flask(__name__)
+DB_PATH = '/srv/www/cykelstaden/db.sql'
 
 @app.route("/")
 def main():
-    conn = sqlite3.connect('db.sql')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('SELECT tweet_id, tweet, time from tweets ORDER BY tweet_id')
     res = []
@@ -21,6 +22,7 @@ def main():
     html =  """
 <html>
     <head>
+    <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
     <style>
         #red {
             color: red;
@@ -33,6 +35,27 @@ def main():
         <h1>Cykelstaden Malmö</h1>
         <h3>Antal olyckor den här månaden: <font id="red">%d</font></h3>
         <p><a href="/list/">?</a></p>
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+
+      (function() {
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://links.kejsarmakten.se/piwik/";
+        _paq.push(["setTrackerUrl", u+"piwik.php"]);
+        _paq.push(["setSiteId", "1"]);
+        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- Piwik Image Tracker -->
+    <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+    <!-- End Piwik -->
+    <!-- End Piwik Code --> 
+
+
 
     </body>
 </html>
@@ -41,7 +64,7 @@ def main():
 
 @app.route("/list/")
 def list():
-    conn = sqlite3.connect('db.sql')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id')
     res = []
@@ -53,6 +76,7 @@ def list():
 <html>
     <head>
     <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script> 
+    <title>Cykelstaden malmÃ¶ - Ã–vervakar cykelolyckor i MalmÃ¶</title>
     <style>
     html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
@@ -82,7 +106,7 @@ function initialize(){
     """
     k = ""
     for row in res:
-       k += u"address.push('%s + Malmö,Sweden');" % (row[4])
+       k += u"address.push('%s + MalmÃ¶,Sweden');" % (row[4])
 
 
 
@@ -92,7 +116,7 @@ function initialize(){
    
     //set your map options
     var myOptions = {
-        //zoom: 1,
+        zoom: 13,
         disableDefaultUI: false,
         mapTypeId: google.maps.MapTypeId.HYBRID
     };
@@ -131,7 +155,7 @@ function initialize(){
         }
         //set the center to the bound area and fit the map accordingly
         map.setCenter(latlngbounds.getCenter());
-        map.fitBounds(latlngbounds);
+        //map.fitBounds(latlngbounds);
     },500);
 };
     
@@ -140,8 +164,8 @@ function initialize(){
 
     <body >
 
-        <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
-        <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
+        <a href="/"><h1 style="text-align:center">Cykelstaden MalmÃ¶</h1></a>
+        <p>Cykelolyckor i MalmÃ¶ raporterade av polisen de senaste 31 dagarna:</p>
         <ul>
 """
     l = ""
@@ -151,7 +175,7 @@ function initialize(){
     </ul>
 
     <p>
-        Jag är en cyklist i Malmö, vill ni kontakta mig når ni mig lättast på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller <a href="http://blog.kejsarmakten.se/">här</a>
+        Jag är en cyklist i MalmÃ¶. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.
     </p>
     
     <div id="map-canvas"/>
@@ -183,5 +207,5 @@ function initialize(){
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+    app.debug = False 
+    app.run(host="0.0.0.0")
