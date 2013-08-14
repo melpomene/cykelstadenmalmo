@@ -77,14 +77,6 @@ def list():
     <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script> 
     <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
     <style>
-    html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-
-     #map-canvas { height: 80% }
-
-        #red {
-            color: red;
-        }
         #center {
             text-align:center;  
         }
@@ -93,52 +85,38 @@ def list():
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw_oiAiVvap_tRxyIzf8aabP1jwPlR0ps&sensor=false">
     </script>
 <script type="text/javascript">
-
 google.maps.event.addDomListener(window, 'load', initialize);
 
+var color=["red","green","purple","yellow","blue","gray","orange"," white"]
+var markers, url;
 function initialize(){
 
-  var geocoder_map;
-    var map;
-    var markers;
+    
+    var b = new Array(); //lon & lat of addresses
     var address = new Array();
+    var geocoder_map;
+    var map;
+
     """
     k = ""
     for row in res:
-       k += u"address.push('%s + Malmö,Sweden');" % (row[4])
-
-
+       k += u"address.push('%s  ,Malmö,Sweden');" % (row[4])
 
     j=u"""
-    
-    var markersStr;
-   
-    //set your map options
-    var myOptions = {
-        zoom: 13,
-        disableDefaultUI: false,
-        mapTypeId: google.maps.MapTypeId.HYBRID
-    };
    
     //create the new map instance and attach to your DOM element
-    var map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
-   
-    //create the bound object; used for centering
-    var latlngbounds = new google.maps.LatLngBounds();
+    //var map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
    
     //new geocoder to convert the addresses to coordinates
     geocoder_map = new google.maps.Geocoder();
-    markers = new Array();
+    
    
     //loop through the addresses and add the resulting coordinates to an array
     for(var i=0;i<address.length;i++){
         geocoder_map.geocode( { 'address': address[i]}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                //add marker to the map
-                var marker = new google.maps.Marker({
-                    map: map, position: results[0].geometry.location
-                });
-                markers.push(results[0].geometry.location);
+                
+                b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
             }
             else {
                 alert("Geocode for "+address+" was not successful for the following reason: " + status);
@@ -148,19 +126,26 @@ function initialize(){
    
     // wait 500ms so the array is fully populated
     setTimeout(function(){
-        for(var i=1; i < markers.length; i++){
-            //add coordinates to the outer bounds of the map
-            latlngbounds.extend(markers[i]);    
+
+        for (var i=0;i<address.length;i++){
+            markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
+            url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
         }
-        //set the center to the bound area and fit the map accordingly
-        map.setCenter(latlngbounds.getCenter());
-        //map.fitBounds(latlngbounds);
+        addpic(url);
+
     },500);
 };
+function addpic(url){
+
+var elem = document.createElement("img");
+elem.setAttribute("src", url);
+document.getElementById("map-canvas").appendChild(elem);
+
     
+}
+
     </script>
     </head>
-
     <body >
 
         <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
@@ -170,16 +155,17 @@ function initialize(){
 """
     l = ""
     for row in res:
-        l += u"<li class='%s' ><a href='%s'>%s</a></li>" % (row[4],row[3], row[1][:120]+ "...")
+        l += u"<li class='%s' ><a href='%s' target='_blank'>%s</a></li>" % (row[4],row[3], row[1][:120]+ "...")
     end_html = u"""
     </ul>
 
     <p>
-        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.
+        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.<br />
+        Design och karta är fixat av <a href="https://twitter.com/ehsanpo">@ehsanpo</a>, tackar!
     </p>
 
-<div id="map-canvas"/>
-    <div id="map-canvas"/>
+<div id="map-canvas"/></div>
+    <div>
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
