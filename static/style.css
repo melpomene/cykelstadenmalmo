@@ -15,7 +15,7 @@ ul {
 li > a {
     background: none repeat scroll 0 0 #EEEEEE;
     display: inline-block;
-    margin: 3px 0;
+    margin: 5px 0;
     padding: 5px;
 }
 body {
@@ -47,6 +47,29 @@ h3 {
     -moz-animation: fadein 1s; /* Firefox */
     -webkit-animation: fadein 1s; /* Safari and Chrome */
     -o-animation: fadein 1s; /* Opera */
+}
+ul li a span {
+    background: linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
+    box-shadow: 0 -5px 2px -3px;
+    padding: 9px;
+}
+li:nth-child(1) > a > span {
+    box-shadow: 0 -5px 2px -3px red;
+}
+li:nth-child(2) > a > span {
+    box-shadow: 0 -5px 2px -3px green;
+}
+li:nth-child(3) > a > span {
+    box-shadow: 0 -5px 2px -3px purple;
+}
+li:nth-child(4) > a > span {
+    box-shadow: 0 -5px 2px -3px yellow;
+}
+li:nth-child(5) > a > span {
+    box-shadow: 0 -5px 2px -3px blue;
+}
+li:nth-child(6) > a > span {
+    box-shadow: 0 -5px 2px -3px gray;
 }
 #map-canvas{
     text-align: center;
