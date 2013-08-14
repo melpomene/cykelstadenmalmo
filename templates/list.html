@@ -22,7 +22,7 @@
         var b = new Array(); //lon & lat of addresses
         var address = new Array();
      {% for tweet in tweets %}
-     address.push('{{ tweet[4] }}  ,Malmö,Sweden');
+     address.push('{{ tweet[1][4] }}  ,Malmö,Sweden');
      {% endfor %}
            //new geocoder to convert the addresses to coordinates
         geocoder_map = new google.maps.Geocoder();
@@ -70,7 +70,7 @@
         <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
         <ul>
         {% for tweet in tweets %}
-	<li class='{{ tweet[4] }}' ><a href='{{ tweet[3] }}' target='_blank'>{{ tweet[1][:120] }}...</a></li>
+	<li class='{{ tweet[1][4] }}' ><a href='{{ tweet[1][3] }}' target='_blank'>{{ tweet[0] }}. {{ tweet[1][1][:120] }}...</a></li>
         {% endfor %}
         </ul>
 

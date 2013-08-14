@@ -23,14 +23,14 @@ def main():
     return render_template('index.html', amount=amount)
 
 @app.route("/list/")
-def list():
+def info():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id')
     res = []
     for row in c:
         res.append( (row[0], row[1], row[2], row[3],row[4]))
-    return render_template('list.html', tweets=res)
+    return render_template('list.html', tweets=list(enumerate(res)))
 
 
 if __name__ == "__main__":
