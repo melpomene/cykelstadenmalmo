@@ -1,9 +1,7 @@
 html,body{
     height: 100%;
-    margin:0!important;
-    padding: 0;
 }
-div,h3,p{
+div,h3,p,html,body{
     padding: 0;
     margin: 0;
 }
@@ -14,6 +12,12 @@ ul {
     list-style: none outside none;
     padding: 0;
 }
+li > a {
+    background: none repeat scroll 0 0 #EEEEEE;
+    display: inline-block;
+    margin: 3px 0;
+    padding: 5px;
+}
 body {
     background-color: #d6cec3;
      background: -webkit-linear-gradient(#d6cec3,#e4ddca);
@@ -22,7 +26,6 @@ body {
     background: -ms-linear-gradient(#d6cec3,#e4ddca);
     background: linear-gradient(#d6cec3,#e4ddca);
     font-family: 'Lato', sans-serif;
-
 }
 h1 {
     color: #FFFFFF;
@@ -31,7 +34,19 @@ h1 {
     margin: 50px 0;
     text-shadow: 0 0 2px #999999;
     text-transform: uppercase;
-
+}
+h3 {
+    background: none repeat scroll 0 0 #2ECC71;
+    border-radius: 10px 10px 0 0;
+    color: #ECF0F1;
+    display: inline-block;
+    font-weight: 400;
+    padding: 10px;
+    width: 280px;
+    animation: fadein 1s;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
 }
 #map-canvas{
     text-align: center;
@@ -40,19 +55,6 @@ h1 {
       box-shadow: 0 0 4px #555555;
     margin: 20px 0;
            animation: fadein 1s;
-    -moz-animation: fadein 1s; /* Firefox */
-    -webkit-animation: fadein 1s; /* Safari and Chrome */
-    -o-animation: fadein 1s; /* Opera */
-}
-h3 {
-     background: none repeat scroll 0 0 #2ECC71;
-    border-radius: 10px 10px 0 0;
-    color: #ECF0F1;
-    display: inline-block;
-    font-weight: 400;
-    padding: 10px;
-    width: 280px;
-        animation: fadein 1s;
     -moz-animation: fadein 1s; /* Firefox */
     -webkit-animation: fadein 1s; /* Safari and Chrome */
     -o-animation: fadein 1s; /* Opera */
@@ -99,7 +101,6 @@ h3 {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
     width: 200px;
 }
-
 .btn:hover {
     /*linear-gradient*/
     background: -webkit-gradient(linear,left top,left bottom,from(#c5c5c5),to(#f3f3f4));
@@ -113,11 +114,5 @@ h3 {
     box-shadow: 0 0 2px rgba(0,0,0,.9),inset 0 2px 3px rgba(0,0,0,.2),0 1px 1px rgba(255,255,255,.9);
     line-height: 2.5;
 } 
-li > a {
-    background: none repeat scroll 0 0 #EEEEEE;
-    display: inline-block;
-    margin: 3px 0;
-    padding: 5px;
-}
 
 @keyframes fadein {from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-moz-keyframes fadein { /* Firefox */ from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-webkit-keyframes fadein { /* Safari and Chrome */ from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-o-keyframes fadein { /* Opera */ from {margin-top:-10px; opacity:0; } to {margin-top:0; opacity: 1; } }​

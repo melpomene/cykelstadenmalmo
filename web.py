@@ -74,7 +74,6 @@ def list():
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/static/style.css">
-    <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script> 
     <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
     <style>
         #center {
@@ -85,64 +84,58 @@ def list():
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw_oiAiVvap_tRxyIzf8aabP1jwPlR0ps&sensor=false">
     </script>
 <script type="text/javascript">
-google.maps.event.addDomListener(window, 'load', initialize);
 
-var color=["red","green","purple","yellow","blue","gray","orange"," white"]
-var markers, url;
-function initialize(){
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-    
-    var b = new Array(); //lon & lat of addresses
-    var address = new Array();
-    var geocoder_map;
-    var map;
+    function initialize(){
+        var color=["red","green","purple","yellow","blue","gray","orange"," white"]
+        var markers, url,geocoder_map;
+        var b = new Array(); //lon & lat of addresses
+        var address = new Array();
 
-    """
-    k = ""
-    for row in res:
-       k += u"address.push('%s  ,Malmö,Sweden');" % (row[4])
+        """
+        k = ""
+        for row in res:
+           k += u"address.push('%s  ,Malmö,Sweden');" % (row[4])
 
-    j=u"""
-   
-    //create the new map instance and attach to your DOM element
-    //var map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
-   
-    //new geocoder to convert the addresses to coordinates
-    geocoder_map = new google.maps.Geocoder();
-    
-   
-    //loop through the addresses and add the resulting coordinates to an array
-    for(var i=0;i<address.length;i++){
-        geocoder_map.geocode( { 'address': address[i]}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                
-                b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
-            }
-            else {
-                alert("Geocode for "+address+" was not successful for the following reason: " + status);
-            }
-        });
-    }
-   
-    // wait 500ms so the array is fully populated
-    setTimeout(function(){
-
-        for (var i=0;i<address.length;i++){
-            markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
-            url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
+        j=u"""
+       
+        //new geocoder to convert the addresses to coordinates
+        geocoder_map = new google.maps.Geocoder();
+        
+       
+        //loop through the addresses and add the resulting coordinates to an array
+        for(var i=0;i<address.length;i++){
+            geocoder_map.geocode( { 'address': address[i]}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    
+                    b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
+                }
+                else {
+                    alert("Geocode for "+address+" was not successful for the following reason: " + status);
+                }
+            });
         }
-        addpic(url);
+       
+        // wait 500ms so the array is fully populated
+        setTimeout(function(){
 
-    },500);
-};
-function addpic(url){
+            for (var i=0;i<address.length;i++){
+                markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
+                url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
+            }
+            addpic(url);
 
-var elem = document.createElement("img");
-elem.setAttribute("src", url);
-document.getElementById("map-canvas").appendChild(elem);
+        },500);
+    };
 
-    
-}
+    function addpic(url){
+
+    var elem = document.createElement("img");
+    elem.setAttribute("src", url);
+    document.getElementById("map-canvas").appendChild(elem);
+
+    }
 
     </script>
     </head>
