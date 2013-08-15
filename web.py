@@ -26,7 +26,7 @@ def main():
 def info():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id')
+    c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id DESC')
     res = []
     for row in c:
         res.append( (row[0], row[1], row[2], row[3],row[4]))
