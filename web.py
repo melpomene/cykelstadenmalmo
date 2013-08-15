@@ -30,7 +30,7 @@ def info():
     res = []
     for row in c:
         res.append( (row[0], row[1], row[2], row[3],row[4]))
-    return render_template('list.html', tweets=list(enumerate(res)))
+    return render_template('list.html', tweets=list(enumerate(res, start=1)))
 
 
 if __name__ == "__main__":
