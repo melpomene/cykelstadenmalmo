@@ -26,11 +26,18 @@ def main():
 def info():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id')
+    c.execute('SELECT tweet_id, tweet, time, url, adress from tweets ORDER BY tweet_id DESC')
     res = []
     for row in c:
+<<<<<<< HEAD
         res.append( (row[0], row[1], row[2], row[3],row[4]))
     return render_template('list.html', tweets=list(enumerate(res, start=1)))
+=======
+        if datetime.strptime(row[2], "%Y-%m-%d %H:%M:%S" ) > datetime.today() - timedelta(days=31):
+            res.append( (row[0], row[1], row[2], row[3],row[4]))
+    amount = len(res)
+    return render_template('list.html', amount=amount, tweets=list(enumerate(res, start=1)))
+>>>>>>> ee189f65df05e10bc3be0c183f602dc9867d0c94
 
 
 if __name__ == "__main__":
