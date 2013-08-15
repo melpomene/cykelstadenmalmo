@@ -45,9 +45,10 @@
         setTimeout(function(){
 
             for (var i=0;i<address.length;i++){
-                markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
-                url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
+                markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i];
+                
             }
+            url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false";
             addpic(url);
 
         },500);
