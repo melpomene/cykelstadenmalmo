@@ -91,6 +91,13 @@ li:nth-child(6) > a > span {
     -webkit-box-shadow: 0 -5px 2px -3px gray;
     box-shadow: 0 -5px 2px -3px gray;
 }
+.info{
+    text-align: center;
+}
+.info div {
+    line-height: 90px;
+    margin-bottom: 30px;
+}
 #map-canvas{
     text-align: center;
 }
