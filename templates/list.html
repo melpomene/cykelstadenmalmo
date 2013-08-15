@@ -14,44 +14,43 @@
     </script>
 <script type="text/javascript">
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);
 
-    function initialize(){
-        var color=["red","green","purple","yellow","blue","gray","orange"," white"]
-        var markers, url,geocoder_map;
-        var b = new Array(); //lon & lat of addresses
-        var address = new Array();
-     {% for tweet in tweets %}
-     address.push('{{ tweet[1][4] }}  ,Malmö,Sweden');
-     {% endfor %}
-           //new geocoder to convert the addresses to coordinates
-        geocoder_map = new google.maps.Geocoder();
-        
-       
-        //loop through the addresses and add the resulting coordinates to an array
-        for(var i=0;i<address.length;i++){
-            geocoder_map.geocode( { 'address': address[i]}, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    
-                    b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
-                }
-                else {
-                    alert("Geocode for "+address+" was not successful for the following reason: " + status);
-                }
-            });
-        }
-       
-        // wait 500ms so the array is fully populated
-        setTimeout(function(){
-
-            for (var i=0;i<address.length;i++){
-                markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
-                url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
+function initialize(){
+    var color=["red","green","purple","yellow","blue","gray","orange"," white"]
+    var markers, url,geocoder_map;
+    var b = new Array(); //lon & lat of addresses
+    var address = new Array();
+    {% for tweet in tweets %}
+        address.push('{{ tweet[1][4] }}  ,Malmö,Sweden');
+    {% endfor %}
+    //new geocoder to convert the addresses to coordinates
+    geocoder_map = new google.maps.Geocoder();
+    
+   
+    //loop through the addresses and add the resulting coordinates to an array
+    for(var i=0;i<address.length;i++){
+        geocoder_map.geocode( { 'address': address[i]}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {  
+                b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
             }
-            addpic(url);
+            else {
+                alert("Geocode for "+address+" was not successful for the following reason: " + status);
+            }
+        });
+    }
+   
+    // wait 500ms so the array is fully populated
+    setTimeout(function(){
 
-        },500);
-    };
+        for (var i=0;i<address.length;i++){
+            markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i]
+            url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false"
+        }
+        addpic(url);
+
+    },500);
+};
 
     function addpic(url){
 
