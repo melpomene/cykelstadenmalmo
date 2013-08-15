@@ -65,43 +65,44 @@ function addpic(url){
     </script>
     </head>
     <body >
-
-        <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
         <div class="warp" >
-        <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
-        <ul>
-        {% for tweet in tweets %}
-	<li class='{{ tweet[1][4] }}' ><a href='{{ tweet[1][3] }}' target='_blank'><span>{{ tweet[0] }}</span> {{ tweet[1][1][:120] }}...</a></li>
-        {% endfor %}
-        </ul>
+            <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
+            <h3 >Antal olyckor den här månaden:</h3>
+            <div class="antal">{{ amount }}</div>
+            <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
+            <ul>
+            {% for tweet in tweets %}
+    	<li class='{{ tweet[1][4] }}' ><a href='{{ tweet[1][3] }}' target='_blank'><span>{{ tweet[0] }}</span> {{ tweet[1][1][:120] }}...</a></li>
+            {% endfor %}
+            </ul>
 
-    <p>
-        Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.<br />
-        Design och karta är fixat av <a href="https://twitter.com/ehsanpo">@ehsanpo</a>, tackar!
-    </p>
+        <p>
+            Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.<br />
+            Design och karta är fixat av <a href="https://twitter.com/ehsanpo">@ehsanpo</a>, tackar!
+        </p>
 
-<div id="map-canvas"/></div>
-    <div>
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-      _paq.push(["trackPageView"]);
-      _paq.push(["enableLinkTracking"]);
+    <div id="map-canvas"/></div>
+        <div>
+        <!-- Piwik -->
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+          _paq.push(["trackPageView"]);
+          _paq.push(["enableLinkTracking"]);
 
-      (function() {
-        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://links.kejsarmakten.se/piwik/";
-        _paq.push(["setTrackerUrl", u+"piwik.php"]);
-        _paq.push(["setSiteId", "1"]);
-        var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
-        g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <!-- Piwik Image Tracker -->
-    <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
-    <!-- End Piwik -->
-    <!-- End Piwik Code --> 
+          (function() {
+            var u=(("https:" == document.location.protocol) ? "https" : "http") + "://links.kejsarmakten.se/piwik/";
+            _paq.push(["setTrackerUrl", u+"piwik.php"]);
+            _paq.push(["setSiteId", "1"]);
+            var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+            g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+        <!-- Piwik Image Tracker -->
+        <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+        <!-- End Piwik -->
+        <!-- End Piwik Code --> 
 
-    </div>
+        </div>
     </body>
 </html>
