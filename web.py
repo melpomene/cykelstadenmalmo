@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 DB_PATH = 'db.sql'
 
-@app.route("/")
+@app.route("/old")
 def main():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -22,6 +22,7 @@ def main():
     amount = len(res)
     return render_template('index.html', amount=amount)
 
+@app.route("/")
 @app.route("/list/")
 def info():
     conn = sqlite3.connect(DB_PATH)
@@ -36,6 +37,6 @@ def info():
 
 
 if __name__ == "__main__":
-    app.debug = True 
+    app.debug = False 
     app.run(host="0.0.0.0")
 
