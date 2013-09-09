@@ -91,8 +91,18 @@ li:nth-child(6) > a > span {
     -webkit-box-shadow: 0 -5px 2px -3px gray;
     box-shadow: 0 -5px 2px -3px gray;
 }
-#map-canvas{
+.info{
     text-align: center;
+}
+.info div {
+    line-height: 90px;
+    margin-bottom: 30px;
+}
+#map-canvas{
+   min-height: 50px;
+    position: relative;
+    text-align: center;
+    width: 100%;
 }
 #map-canvas img{
       box-shadow: 0 0 4px #555555;
@@ -102,11 +112,18 @@ li:nth-child(6) > a > span {
     -webkit-animation: fadein 1s; /* Safari and Chrome */
     -o-animation: fadein 1s; /* Opera */
 }
+#map-canvas:before {
+    content: "laddar kartan...";
+    left: 50%;
+    top: 20%;
+    position: absolute;
+}
 .warp {
     line-height: 25px;
     margin: 0 auto;
     max-width: 100%;
-    width: 940px;}
+    width: 940px;
+ position: relative;}
 .antal{
     background-color: #55EFCB;
     background: -webkit-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
