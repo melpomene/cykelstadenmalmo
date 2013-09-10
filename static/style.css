@@ -112,12 +112,6 @@ li:nth-child(6) > a > span {
     -webkit-animation: fadein 1s; /* Safari and Chrome */
     -o-animation: fadein 1s; /* Opera */
 }
-#map-canvas:before {
-    content: "laddar kartan...";
-    left: 50%;
-    top: 20%;
-    position: absolute;
-}
 .warp {
     line-height: 25px;
     margin: 0 auto;
