@@ -99,7 +99,10 @@ li:nth-child(6) > a > span {
     margin-bottom: 30px;
 }
 #map-canvas{
+   min-height: 50px;
+    position: relative;
     text-align: center;
+    width: 100%;
 }
 #map-canvas img{
       box-shadow: 0 0 4px #555555;
@@ -113,7 +116,8 @@ li:nth-child(6) > a > span {
     line-height: 25px;
     margin: 0 auto;
     max-width: 100%;
-    width: 940px;}
+    width: 940px;
+ position: relative;}
 .antal{
     background-color: #55EFCB;
     background: -webkit-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
