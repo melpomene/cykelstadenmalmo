@@ -5,168 +5,181 @@ div,h3,p,html,body{
     padding: 0;
     margin: 0;
 }
-a{
-  text-decoration: none;  
-  color: #2153ea;
-   outline: medium none;
+body {
+    background: url("bg.jpg") repeat fixed center 0 / cover  rgba(0, 0, 0, 0);
+    font-family: 'Lato',sans-serif;
 }
-li a {
-    color: #222;
-    text-decoration: none;
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    letter-spacing: 4px;
+    line-height: 90px;
+    margin: 10% 0 20px;
+    text-align: center;
+    text-transform: uppercase;
 }
-li a:visited {
-    color: #444444;
+.half{
+  background:none repeat scroll 0 0 rgba(228, 221, 202,0.9);
+    padding: 40px 0;
 }
-a:hover {
-    color: #000;
+.half2 {
+    color: #CCCCCC;
+    padding: 50px 0;
+    text-align: center;
+}
+.half3 {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.8);
+    color: #BDC3C7;
+    padding: 50px 0;
+}
+#map-canvas > img {
+    border-radius: 10px;
+      max-width: 100%;
+}
+.warp {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 960px;
+}
+p {
+    margin: 0;
+}
+.info {
+    background: none repeat scroll 0 0 rgba(26, 188, 156, 0.8);
+    border: 2px solid;
+    color: #FFFFFF;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    width: 220px;
+}
+.first {
+    box-shadow: 0 0 50px #000000 inset;
+    height: 85%;
+     max-height: 600px;
+}
+.antal {
+    font-size: 40px;
+}
+h3 {
+    font-weight: normal;
+    line-height: 30px;
+    margin: 0;
+    text-transform: uppercase;
+}
+ul li a span {
+  background: none repeat scroll 0 0 #FFDC00;
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF;
+    margin-right: 4px;
+    padding: 9px;
 }
 ul {
     list-style: none outside none;
+    margin: 40px auto 0;
     padding: 0;
+    width: auto;
 }
-li > a {
-    background: none repeat scroll 0 0 #EEEEEE;
-    display: inline-block;
-    margin: 5px 0;
-    padding: 5px;
-}
-body {
-    background-color: #d6cec3;
-     background: -webkit-linear-gradient(#d6cec3,#e4ddca);
-    background: -moz-linear-gradient(#d6cec3,#e4ddca);
-    background: -o-linear-gradient(#d6cec3,#e4ddca);
-    background: -ms-linear-gradient(#d6cec3,#e4ddca);
-    background: linear-gradient(#d6cec3,#e4ddca);
-    font-family: 'Lato', sans-serif;
-}
-h1 {
+.warp > h2 {
     color: #FFFFFF;
-    font-size: 36px;
-    letter-spacing: 4px;
-    margin: 50px 0;
-    text-shadow: 0 0 2px #999999;
-    text-transform: uppercase;
+    font-size: 20px;
+    padding-bottom: 20px;
 }
-h3 {
-    background: none repeat scroll 0 0 #2ECC71;
-    border-radius: 10px 10px 0 0;
-    color: #ECF0F1;
-    display: inline-block;
-    font-weight: 400;
-    padding: 10px;
-    width: 280px;
-    animation: fadein 1s;
-    -moz-animation: fadein 1s; /* Firefox */
-    -webkit-animation: fadein 1s; /* Safari and Chrome */
-    -o-animation: fadein 1s; /* Opera */
-}
-ul li a span {
-    background:#55EFCB;
-    background: linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    box-shadow: 0 -5px 2px -3px;
-    padding: 9px;
-    margin-right: 4px;
+.half .warp,.half3 .warp {
+    text-align: center;
 }
 li:nth-child(1) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px red;
-    box-shadow: 0 -5px 2px -3px red;
+    background: #ffdc00;
 }
 li:nth-child(2) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px green;
-    box-shadow: 0 -5px 2px -3px green;
+    background: #ff851b;
 }
 li:nth-child(3) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px purple;
-    box-shadow: 0 -5px 2px -3px purple;
+    background: #7fdbff;
 }
 li:nth-child(4) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px yellow;
-    box-shadow: 0 -5px 2px -3px yellow;
+    background: #ff4136;
 }
 li:nth-child(5) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px blue;
-    box-shadow: 0 -5px 2px -3px blue;
+    background: #85144b;
 }
 li:nth-child(6) > a > span {
-    -webkit-box-shadow: 0 -5px 2px -3px gray;
-    box-shadow: 0 -5px 2px -3px gray;
+    background: #f012be;
 }
-.info{
-    text-align: center;
+li:nth-child(7) > a > span {
+    background: #b10dc9;
 }
-.info div {
-    line-height: 90px;
-    margin-bottom: 30px;
+li:nth-child(8) > a > span {
+    background: #001f3f;
 }
-#map-canvas{
-   min-height: 50px;
-    position: relative;
-    text-align: center;
-    width: 100%;
+li:nth-child(9) > a > span {
+    background: #0074d9;
 }
-#map-canvas img{
-      box-shadow: 0 0 4px #555555;
-    margin: 20px 0;
-           animation: fadein 1s;
-    -moz-animation: fadein 1s; /* Firefox */
-    -webkit-animation: fadein 1s; /* Safari and Chrome */
-    -o-animation: fadein 1s; /* Opera */
+li:nth-child(10) > a > span {
+    background: #39cccc;
 }
-.warp {
-    line-height: 25px;
-    margin: 0 auto;
-    max-width: 100%;
-    width: 940px;
- position: relative;}
-.antal{
-    background-color: #55EFCB;
-    background: -webkit-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    background: -moz-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    background: -o-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    background: -ms-linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    background: linear-gradient(#55EFCB, #5BCAFF) repeat scroll 0 0 transparent;
-    -webkit-box-shadow: 0 8px 10px 2px rgba(0, 0, 0, 0.1), 0 30px 15px -5px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 8px 10px 2px rgba(0, 0, 0, 0.1), 0 30px 15px -5px rgba(0, 0, 0, 0.05);
-    color: #FFFFFF;
-    display: block;
-    font-size: 75px;
+li > a {
+   background: none repeat scroll 0 0 #EEEEEE;
+    border-bottom: 1px solid #FFFFFF;
+    display: inline-block;
+    line-height: 40px;
     margin: 0 auto;
     padding: 10px;
-    text-shadow: 0 0 4px #888888;
-    width: 280px;
+    text-align: left;
 }
-.btn {
-   background: -webkit-linear-gradient(#F3F3F4, #C5C5C5) repeat scroll 0 0 transparent;
-    background: -moz-linear-gradient(#F3F3F4, #C5C5C5) repeat scroll 0 0 transparent;
-    background: -o-linear-gradient(#F3F3F4, #C5C5C5) repeat scroll 0 0 transparent;
-    background: -ms-linear-gradient(#F3F3F4, #C5C5C5) repeat scroll 0 0 transparent;
-    background: linear-gradient(#F3F3F4, #C5C5C5) repeat scroll 0 0 transparent;
-    border-radius: 2px 2px 2px 2px;
-    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.4) inset, 0 4px 5px rgba(0, 0, 0, 0.02);
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.4), 0 1px rgba(255, 255, 255, 0.4) inset, 0 4px 5px rgba(0, 0, 0, 0.02);
-    color: #484747;
-    display: block;
-    font-size: 0.9em;
-    height: 33px;
-    line-height: 33px;
-    margin: 20px auto;
-    text-align: center;
+li a {
+    color: #222222;
     text-decoration: none;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-    width: 200px;
 }
-.btn:hover {
-    /*linear-gradient*/
-    background: -webkit-gradient(linear,left top,left bottom,from(#c5c5c5),to(#f3f3f4));
-    background: -webkit-linear-gradient(#c5c5c5,#f3f3f4);
-    background: -moz-linear-gradient(#c5c5c5,#f3f3f4);
-    background: -o-linear-gradient(#c5c5c5,#f3f3f4);
-    background: linear-gradient(#c5c5c5,#f3f3f4);
-    /*box-shadow*/
-    -webkit-box-shadow: 0 0 2px rgba(0,0,0,.9),inset 0 2px 3px rgba(0,0,0,.2),0 1px 1px rgba(255,255,255,.9);
-    -moz-box-shadow: 0 0 2px rgba(0,0,0,.9),inset 0 2px 3px rgba(0,0,0,.2),0 1px 1px rgba(255,255,255,.9);
-    box-shadow: 0 0 2px rgba(0,0,0,.9),inset 0 2px 3px rgba(0,0,0,.2),0 1px 1px rgba(255,255,255,.9);
-    line-height: 2.5;
-} 
-
-@keyframes fadein {from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-moz-keyframes fadein { /* Firefox */ from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-webkit-keyframes fadein { /* Safari and Chrome */ from {margin-top:-10px; opacity:0; } to {margin-top:0 opacity:1; } } @-o-keyframes fadein { /* Opera */ from {margin-top:-10px; opacity:0; } to {margin-top:0; opacity: 1; } }​
+a{
+    color: #fff;
+}
+.devteam {
+    background:none repeat scroll 0 0 rgba(255, 255, 255, 0.2);
+    color: #DDDDDD;
+    display: inline-block;
+    margin: 1%;
+    padding: 3% 1%;
+    width: 30%;
+}
+.devteam h4 span {
+    font-size: 13px;
+    font-weight: normal;
+}
+.devteam > img {
+    border-radius: 50%;
+    max-width: 100%;
+    width: 150px;
+}
+.devteam a {
+    margin: 4px;
+}
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.cf:after {
+    clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+.wow{
+    outline: 1px solid transparent;
+}
+.hjul {
+    animation: 3s linear 0s normal none infinite hjul;
+}
+@keyframes hjul {
+  0%{
+     transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
