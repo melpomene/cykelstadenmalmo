@@ -36,7 +36,8 @@ if __name__ == '__main__':
         adress = tweet.text.rsplit(',',1)[1].split('http',1)[0].replace(".","")
         #b = a.split('http',1)[0]
         #adress = a.replace(".","")
-        if "cykel" in tweet_text.lower() or "cyklist" in tweet_text.lower():
+        search_vector = tweet_text.lower().split(" ")
+        if "cykel" in search_vector or "cyklist" in search_vector:
             c.execute('INSERT INTO tweets (tweet, tweet_id, url,adress) VALUES (?, ?, ?, ?)', (tweet_text, tweet_id, url, adress))
             print "JA\t" + tweet_text
         else:
