@@ -1,107 +1,112 @@
 <html>
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
-    <style>
-        #center {
-            text-align:center;  
-        }
-    </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw_oiAiVvap_tRxyIzf8aabP1jwPlR0ps&sensor=false">
-    </script>
-<script type="text/javascript">
-google.maps.event.addDomListener(window, 'load', initialize);
-var delay = 100,
-    nextAddress = 0,
-    geo,
-    color=["red","green","purple","yellow","blue","gray","orange","red","green","purple","yellow","blue","gray","orange"],
-    markers="", url,geocoder_map,
-    b = new Array(), //lon & lat of addresses
-    address = new Array();
-    {% for tweet in tweets %}
-        address.push('{{ tweet[1][4] }}  ,Malmö,Sweden');
-    {% endfor %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Cykelstaden Malmö - Övervakar cykelolyckor i Malmö</title>
+        <meta property="og:image" content="static/social.jpg"/>
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="static/style.css">
+        <link rel="stylesheet" type="text/css" href="static/animate.css">
+        <script src="static/wow.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw_oiAiVvap_tRxyIzf8aabP1jwPlR0ps&sensor=false"></script>
+        <script type="text/javascript">
+            new WOW().init();
+            google.maps.event.addDomListener(window, 'load', initialize);
+            var delay = 100,
+                nextAddress = 0,
+                geo,
+                color=["yellow","green","blue","red","purple","gray","orange","red","green","purple","yellow","blue","gray","orange"],
+                markers="", url,geocoder_map,
+                b = new Array(), //lon & lat of addresses
+                address = new Array();
+                {% for tweet in tweets %}
+                    address.push('{{ tweet[1][4] }} ,Malmö,Sweden');
+                {% endfor %}
+            // ====== Geocoding ======
+            function getAddress(search, next) {
+                geo.geocode({address:search}, function (results,status)
+                  { 
+                    // If that was successful
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
+                    }
+                    // ====== Decode the error status ======
+                    else {
+                      // === if we were sending the requests to fast, try this one again and increase the delay
+                      if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                        nextAddress--;
+                        delay++;
+                      } else {
+                        var reason="Code "+status;
+                        var msg = 'address="' + search + '" error=' +reason+ '(delay='+delay+'ms)<br>';
+                        document.getElementById("messages").innerHTML += msg;
 
-// ====== Geocoding ======
-function getAddress(search, next) {
-    geo.geocode({address:search}, function (results,status)
-      { 
-        // If that was successful
-        if (status == google.maps.GeocoderStatus.OK) {
-            b.push(results[0].geometry.location.lat()+","+results[0].geometry.location.lng());
-        }
-        // ====== Decode the error status ======
-        else {
-          // === if we were sending the requests to fast, try this one again and increase the delay
-          if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-            nextAddress--;
-            delay++;
-          } else {
-            var reason="Code "+status;
-            var msg = 'address="' + search + '" error=' +reason+ '(delay='+delay+'ms)<br>';
-            document.getElementById("messages").innerHTML += msg;
-
-          }   
-        }
-        next();
-      }
-    );
-}
-function initialize(){
-    geo = new google.maps.Geocoder();//new geocoder to convert the addresses to coordinates
-   theNext();    
-}; 
-function addpic(url){
-    var elem2='<img src="'+url+'" alt="Karta"> ';
-    document.getElementById("map-canvas").innerHTML=elem2;
-
-}
-function theNext() {
-        if (nextAddress < address.length) {
-          setTimeout('getAddress("'+address[nextAddress]+'",theNext)', delay);
-          nextAddress++;
-        } else {
-          // We're done. Show map bounds
-          // wait 500ms so the array is fully populated
-        setTimeout(function(){
-
-        for (var i=0;i<address.length;i++){
-            markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i];
-        }
-        url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false";
-        addpic(url);
-    },500);
-        }
-}
-    </script>
+                      }   
+                    }
+                    next();
+                  }
+                );
+            }
+            function initialize(){
+                geo = new google.maps.Geocoder();//new geocoder to convert the addresses to coordinates
+               theNext();    
+            }; 
+            function addpic(url){
+                var elem2='<img src="'+url+'" alt="Karta"> ';
+                document.getElementById("map-canvas").innerHTML=elem2;
+            }
+            function theNext() {
+                if (nextAddress < address.length) {
+                      setTimeout('getAddress("'+address[nextAddress]+'",theNext)', delay);
+                      nextAddress++;
+                } else {
+                      // We're done. Show map bounds
+                      // wait 500ms so the array is fully populated
+                    setTimeout(function(){
+                        for (var i=0;i<address.length;i++){
+                            markers = markers + "&markers=color:"+color[i]+"|label:" + (i+1) + "|"+ b[i];
+                        }
+                        url="http://maps.googleapis.com/maps/api/staticmap?center=södervärn,Malm%C3%B6,sweden&zoom=12&size=640x460&maptype=roadmap%20" + markers +"&scale=1&sensor=false";
+                        addpic(url);
+                    },500);
+                }
+            }
+        </script>
     </head>
     <body>
-        <div class="warp" >
-            <a href="/"><h1 style="text-align:center">Cykelstaden Malmö</h1></a>
-            <div class="info">
-                <h3 >Antal olyckor den här månaden:</h3>
-                <div class="antal">{{ amount }}</div>
+        <section class="first cf"><h1>Cykelstaden Malmö</h1>
+        <div class="info wow flipInX ">
+            <h3>Antal olyckor den här månaden</h3>
+            <div class="antal">{{ amount }}</div>
             </div>
-           
-            <p>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna:</p>
-            <ul>
-            {% for tweet in tweets %}
-                <li><a href='{{ tweet[1][3] }}' target='_blank'><span>{{ tweet[0] }}</span> {{ tweet[1][1][:120] }}...</a></li>
-            {% endfor %}
-            </ul>
-
-
-        <div id="map-canvas"/> Laddar kartan...</div>
-
-        <p>
-            Jag är en cyklist i Malmö. Ni kan nå mig på <a href="https://twitter.com/kejsarmakten">Twitter</a> eller via <a href="http://blog.kejsarmakten.se/">min blogg</a>.<br />
-            Design och karta är fixat av <a href="https://twitter.com/ehsanpo">@ehsanpo</a>, tackar!
-        </p>
-
-        <div>
+        </section>
+        <section class="half cf">
+            <div class="warp">
+                <h2>Cykelolyckor i Malmö raporterade av polisen de senaste 31 dagarna</h2>
+                <ul>
+                    {% for tweet in tweets %}
+                    <li class="wow flipInX"> <a href='{{ tweet[1][3] }}' target='_blank'><span>{{ tweet[0] }}</span> {{ tweet[1][1][:120] }}...</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section class="half2">
+            <div id="map-canvas"><img class="hjul" src="static/hjul.svg"><br>Laddar Kartan...</div>
+        </section>
+        <section class="half3">
+            <div class="warp">
+                <h3>Skapat av två cyklister i Malmö</h3>
+                <div class="devteam wow fadeInDown">
+                    <img src="static/k.jpg">
+                    <h4>Kristofer <br> <span>Back-end</span></h4>
+                    <p><a target="_blank" href="https://twitter.com/kejsarmakten">@kejsarmakten</a> <a href="http://blog.kejsarmakten.se/">Blogg</a></p>
+                </div>
+                <div class="devteam wow fadeInDown">
+                    <img src="static/e.jpg">
+                    <h4>Ehsan <br> <span>Front-End</span></h4>
+                    <p><a target="_blank" href="https://twitter.com/ehsanpo">@ehsanpo</a> <a href="http://ehsan-pourhadi.nu/">Hemsida</a></p>
+                </div>
+            </div>
+        </section>
         <!-- Piwik -->
         <script type="text/javascript">
           var _paq = _paq || [];
@@ -121,7 +126,5 @@ function theNext() {
         <img src="http://links.kejsarmakten.se/piwik/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
         <!-- End Piwik -->
         <!-- End Piwik Code --> 
-
-        </div>
     </body>
 </html>
